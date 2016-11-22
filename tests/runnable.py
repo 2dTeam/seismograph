@@ -1,13 +1,13 @@
-import seismograph
+import unittest
+import seismograph.runnable as runnable
 
 
-suite = seismograph.Suite(__name__)
-
-
-@suite.register
-def my_first_test(case):
-    case.assertion.equal(2, 1)
-
+class TestRunnableGroup(unittest.TestCase):
+    def make_instance(self):
+        mock_config = {"mock_var": 1}
+        mock_object = ["some_list"]
+        run = runnable.RunnableGroup(mock_object, mock_config)
+        self.assertEqual(run.config, mock_config)
 
 if __name__ == '__main__':
-    seismograph.main()
+    unittest.main()

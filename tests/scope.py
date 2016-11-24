@@ -34,16 +34,35 @@ class TestCaseConfigure(unittest.TestCase):
     def setUp(self):
         self.start_message = "Mock"
         self.round_time = "one"
+        self.real_round_time = 1
+        self.mock_group_class = object
 
     def test_configure_start_message(self):
         scope.configure(self.start_message)
         self.assertEqual(self.start_message,scope._result.START_MESSAGE)
 
-    def test_configure_round_time(self):
+    def test_configure_with_bad_round_time(self):
         try:
             scope.configure(None, self.round_time)
         except AssertionError:
             self.assertEqual(True, True)
+
+    def test_configure_round_time(self):
+        scope.configure(None, self.real_round_time)
+        self.assertEqual(scope._xunit.ROUND_RUNTIME, self.real_round_time)
+
+    def test_case_group_class(self):
+        try:
+            scope.configure(None, None, None, None, None, self.mock_group_class)
+        except AssertionError:
+            self.assertEqual(True, True)
+
+    def test_case_suite_group_class(self):
+        try:
+            scope.configure(None, None, None, None, None, None, self.mock_group_class)
+        except AssertionError:
+            self.assertEqual(True, True)
+
 
 
 if __name__ == '__main__':

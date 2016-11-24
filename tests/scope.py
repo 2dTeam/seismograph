@@ -19,3 +19,16 @@ class TestCaseContext(unittest.TestCase):
             scope.add_extension(mockedExtension)
         except NotImplementedError:
             self.fail("myFunc() raised NotImplementedError unexpectedly!")
+
+
+class TestCaseConfigure(unittest.TestCase):
+    def setUp(self):
+        self.start_message = "Mock"
+
+    def test_configure(self):
+        scope.configure(self.start_message)
+        self.assertEqual(self.start_message,scope._result.START_MESSAGE)
+
+
+if __name__ == '__main__':
+    unittest.main()

@@ -40,8 +40,19 @@ class TestRunnableGroup(unittest.TestCase):
         self.assertEqual(run.config, self.mock_config)
         self.assertEqual(run.objects, self.mock_object)
 
-# class TestFuncRunnable(unittest.TestCase):
-#     def test_run_method(self):
+
+# class TestSetDebugIfAllowed(unittest.TestCase):
+#     class InnerClassWithPDB():
+#         @property
+#         def PDB(self):
+#             return 'MOCK'
+#
+#     def setUp(self):
+#         self.settings_instance = self.InnerClassWithPDB
+#
+#     def test_debug_if_alowed(self):
+#         runnable.set_debug_if_allowed(self.settings_instance)
+#         self.assertEqual(1,1)
 
 
 

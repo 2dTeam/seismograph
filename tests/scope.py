@@ -1,8 +1,17 @@
 from seismograph import scope
 import unittest
+#from mock import MagickMock
 
 
 class TestCaseContext(unittest.TestCase):
+
+    # I am doing it wrong
+    class MockedExtension():
+        def __init__(self):
+            pass
+
+        def __install__(self):
+            pass
 
     def setUp(self):
         pass
@@ -14,7 +23,7 @@ class TestCaseContext(unittest.TestCase):
         with self.assertRaises(NotImplementedError): scope.add_extension("wrong_extension")
 
     def test_scope__add_extension__finds_install(self):
-        import seismograph.ext.mocker as mockedExtension
+        mockedExtension = self.MockedExtension()
         try:
             scope.add_extension(mockedExtension)
         except NotImplementedError:

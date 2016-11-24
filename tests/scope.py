@@ -24,10 +24,17 @@ class TestCaseContext(unittest.TestCase):
 class TestCaseConfigure(unittest.TestCase):
     def setUp(self):
         self.start_message = "Mock"
+        self.round_time = "one"
 
-    def test_configure(self):
+    def test_configure_start_message(self):
         scope.configure(self.start_message)
         self.assertEqual(self.start_message,scope._result.START_MESSAGE)
+
+    def test_configure_round_time(self):
+        try:
+            scope.configure(None, self.round_time)
+        except AssertionError:
+            self.assertEqual(True, True)
 
 
 if __name__ == '__main__':

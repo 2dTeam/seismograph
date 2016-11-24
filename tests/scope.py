@@ -1,11 +1,8 @@
 from seismograph import scope
-
-from .lib.case import (
-    BaseTestCase,
-)
+import unittest
 
 
-class TestCaseContext(BaseTestCase):
+class TestCaseContext(unittest.TestCase):
 
     def setUp(self):
         pass

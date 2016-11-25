@@ -1,12 +1,11 @@
 from seismograph import scope
 import unittest
-#from mock import MagickMock
 
 
 class TestCaseContext(unittest.TestCase):
 
     # I am doing it wrong
-    class MockedExtension():
+    class MockedExtension:
         def __init__(self):
             pass
 
@@ -23,9 +22,9 @@ class TestCaseContext(unittest.TestCase):
         with self.assertRaises(NotImplementedError): scope.add_extension("wrong_extension")
 
     def test_scope__add_extension__finds_install(self):
-        mockedExtension = self.MockedExtension()
+        mocked_extension = self.MockedExtension()
         try:
-            scope.add_extension(mockedExtension)
+            scope.add_extension(mocked_extension)
         except NotImplementedError:
             self.fail("myFunc() raised NotImplementedError unexpectedly!")
 
@@ -73,7 +72,6 @@ class TestCaseConfigure(unittest.TestCase):
         self.assertEqual(scope._loader.DEFAULT_TEST_NAME, self.default_test_name)
         self.assertEqual(scope._case.SKIP_ATTRIBUTE_NAME, self.skip_attr_name)
         self.assertEqual(scope._case.SKIP_WHY_ATTRIBUTE_NAME, self.skip_why_attr_name)
-
 
 
 if __name__ == '__main__':

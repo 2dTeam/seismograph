@@ -49,26 +49,17 @@ class TestCaseConfigure(unittest.TestCase):
         self.assertEqual(self.start_message, scope._result.START_MESSAGE)
 
     def test_configure_with_bad_round_time(self):
-        try:
-            scope.configure(round_runtime=self.round_time)
-        except AssertionError:
-            self.assertEqual(True, True)
+        with self.assertRaises(AssertionError): scope.configure(round_runtime=self.round_time)
 
     def test_configure_round_time(self):
         scope.configure(round_runtime=self.real_round_time)
         self.assertEqual(scope._xunit.ROUND_RUNTIME, self.real_round_time)
 
     def test_case_group_class(self):
-        try:
-            scope.configure(case_group_class=self.mock_group_class)
-        except AssertionError:
-            self.assertEqual(True, True)
+        with self.assertRaises(AssertionError): scope.configure(case_group_class=self.mock_group_class)
 
     def test_case_suite_group_class(self):
-        try:
-            scope.configure(suite_group_class=self.mock_group_class)
-        except AssertionError:
-            self.assertEqual(True, True)
+        with self.assertRaises(AssertionError): scope.configure(suite_group_class=self.mock_group_class)
 
     def test_case_of_init(self):
         scope.configure(config_env_name=self.config_test_name, max_diff=self.max_diff,

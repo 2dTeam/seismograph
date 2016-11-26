@@ -21,6 +21,9 @@ class MockClassScript:
         self._that_self = None
         self._mock_var = MockShouldStopClass(should_stop=should_stop)
 
+    def add_success(self, msg):
+        print msg
+
     @property
     def current_state(self):
         return self._mock_var
@@ -37,12 +40,10 @@ class MockClassScript:
         self._that_self = value
 
 
-
-
 class MockClassProgram:
     class MockClassProgramConfig:
-        def __init__(self):
-            self._STOP = False
+        def __init__(self, should_stop=False):
+            self._STOP = should_stop
 
         @property
         def STOP(self):
@@ -52,8 +53,8 @@ class MockClassProgram:
         def STOP(self, value):
             self._STOP = value
 
-    def __init__(self):
-        self._config = self.MockClassProgramConfig()
+    def __init__(self, should_stop=False):
+        self._config = self.MockClassProgramConfig(should_stop)
 
     @property
     def config(self):
@@ -63,18 +64,24 @@ class MockClassProgram:
 class TestScriptRun(unittest.TestCase):
     def setUp(self):
         self.program = MockClassProgram()
-        self.methodName = "MethodName"
+        self.mock_method_name = "MethodName"
+        self.runnable_method_name = "__str__"
 
     def test_run_raises_debug_error(self):
-        script_obj = script.Script(self.program, self.methodName)
-        inner_instance = MockClassScript(should_stop=False)
-        with self.assertRaises(AttributeError): script_obj.__run__(inner_instance)
+        script_obj = script.Script(self.program, self.mock_method_name)
+        result_instance = MockClassScript(should_stop=False)
+        with self.assertRaises(AttributeError): script_obj.__run__(result_instance)
 
     def test_run_with_should_stop(self):
-        script_obj = script.Script(self.program, self.methodName)
-        inner_instance = MockClassScript(should_stop=True)
-        script_obj.__run__(inner_instance)
-        self.assertEqual(inner_instance.current_state.should_stop, True)
+        program = MockClassProgram(should_stop=True)
+        script_obj = script.Script(program, self.mock_method_name)
+        result_instance = MockClassScript(should_stop=False)
+        with self.assertRaises(AttributeError): script_obj.__run__(result_instance)
+
+    def test_run_with_task(self):
+        script_obj = script.Script(self.program, self.runnable_method_name)
+        result_instance = MockClassScript(should_stop=False)
+        script_obj.__run__(result_instance)
 
 if __name__ == '__main__':
     unittest.main()

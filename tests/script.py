@@ -21,8 +21,8 @@ class MockClassScript:
         self._that_self = None
         self._mock_var = MockShouldStopClass(should_stop=should_stop)
 
-    def add_success(self, msg):
-        print msg
+    def add_success(self, msg, msg2):
+        pass
 
     @property
     def current_state(self):
@@ -82,6 +82,11 @@ class TestScriptRun(unittest.TestCase):
         script_obj = script.Script(self.program, self.runnable_method_name)
         result_instance = MockClassScript(should_stop=False)
         script_obj.__run__(result_instance)
+
+    def test_is_run_returning_method(self):
+        script_obj = script.Script(self.program, self.runnable_method_name)
+        self.assertEqual(script_obj.__is_run__(), False)
+
 
 if __name__ == '__main__':
     unittest.main()

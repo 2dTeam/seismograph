@@ -1,5 +1,6 @@
-from seismograph import script
 import unittest
+
+from seismograph import script
 
 
 class MockShouldStopClass:
@@ -56,9 +57,7 @@ class TestScriptRun(unittest.TestCase):
     def test_run(self):
         script_obj = script.Script(self.program, self.methodName)
         inner_instance = MockClassScript()
-        script_obj.__run__(inner_instance)
-
-        self.assertEqual(inner_instance, inner_instance.that_self)
+        with self.assertRaises(AttributeError): script_obj.__run__(inner_instance)
 
 
 if __name__ == '__main__':

@@ -65,6 +65,7 @@ class TestCaseConfigure(unittest.TestCase):
                         default_test_name=self.default_test_name, skip_attribute_name=self.skip_attr_name,
                         use_static_test_functions=self.use_static_test_functions, test_name_prefix=self.test_name_prefix,
                         skip_why_attribute_name=self.skip_why_attr_name)
+
         self.assertEqual(scope._case.Case.__static__, self.use_static_test_functions)
         self.assertEqual(scope._program.CONFIG_ENV_NAME, self.config_test_name)
         self.assertEqual(scope._case.assertion.__unittest__.maxDiff, self.max_diff)

@@ -28,7 +28,7 @@ class TestRunnableObject(unittest.TestCase):
 
     def test_run(self):
         runnable.run(self.instance, self.mock_arr, self.mock_kwarg)
-        self.assertEqual(self.instance.mock_var, True)
+        self.assertTrue(self.instance.mock_var)
 
 
 class TestRunnableGroup(unittest.TestCase):

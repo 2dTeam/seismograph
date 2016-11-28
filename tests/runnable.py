@@ -26,6 +26,9 @@ class TestRunnableObject(unittest.TestCase):
         self.mock_kwarg = {"test": "mock"}
         self.instance = self.InnerRunnable()
 
+    def tearDown(self):
+        self.instance = None
+
     def test_run(self):
         runnable.run(self.instance, self.mock_arr, self.mock_kwarg)
         self.assertTrue(self.instance.mock_var)

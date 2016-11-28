@@ -67,6 +67,11 @@ class TestScriptRun(unittest.TestCase):
         self.mock_method_name = "MethodName"
         self.runnable_method_name = "__str__"
 
+    def tearDown(self):
+        self.program = None
+        self.mock_method_name = None
+        self.runnable_method_name = None
+
     def test_run_raises_debug_error(self):
         script_obj = script.Script(self.program, self.mock_method_name)
         result_instance = MockClassScript(should_stop=False)
